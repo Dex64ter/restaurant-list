@@ -1,0 +1,36 @@
+.element {
+ width: 100%;
+ background: var(--gray-300);
+
+ margin-top: 1.5rem;
+ padding: 1rem 2rem;
+
+ display: grid;
+ grid-template-columns: 70px 1fr;
+ gap: 1.75rem;
+}
+
+.resImage {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.element section {
+  font-size: 1.125rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: .8rem;
+}
+
+.nomeData {
+  font-size: 1.125rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}

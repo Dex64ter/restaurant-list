@@ -1,0 +1,14 @@
+.container {
+  background: var(--gray-500);
+  max-width: 860px;
+  margin: 4rem auto;
+  padding: 1.2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.list {
+  padding: 1.25rem 1rem;
+}
