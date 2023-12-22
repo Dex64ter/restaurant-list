@@ -28,9 +28,8 @@ export function App() {
           <Search onNewReviewModalIsOpen={handleModal} />
           <NewReviewModal isOpen={newReviewModalIsOpen} onRequest={closeModal} />
           <ul>
-            <ResElement />
-            <ResElement />
-            <ResElement />
+            <ResElement name={'Coco Bambu'} comments={'Lorem ipsum dolor sit amet. Provident, voluptatum'} current_date={'24/02/2023'} rating={4} />
+            <ResElement name={'Sushi Club'} comments={'Lorem ipsum dolor sit amet. Provident, voluptatum'} current_date={'05/05/2023'} rating={3} />
           </ul>
         </section>
       </main>

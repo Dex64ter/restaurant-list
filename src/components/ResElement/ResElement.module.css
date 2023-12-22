@@ -34,3 +34,11 @@
   align-items: center;
   width: 100%;
 }
+
+.content {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
