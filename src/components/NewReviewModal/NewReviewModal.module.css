@@ -1,0 +1,71 @@
+.formModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  
+}
+
+.formModal h2 {
+  font-size: 3rem;
+}
+
+.formModal fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formModal fieldset label {
+  font-size: 1.5rem;
+}
+
+.formModal fieldset input, .textAreaComp {
+  outline: none;
+  font-size: 1.5rem;
+  padding: .5rem .8rem;
+  white-space: pre-wrap;
+}
+
+.buttonArea {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.buttonArea button {
+  width: 248px;
+  padding: 1.375rem 3.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+
+  background: transparent;
+  border-radius: 25px;
+
+  cursor: pointer;
+}
+
+.cancelButton {
+  color: var(--red-alert);
+  border: 2px solid var(--red-alert);
+
+  transition: color .2s, background .2s;
+}
+
+.cancelButton:hover {
+  background: var(--red-alert);
+  color: var(--white);
+}
+
+.addButton {
+  color: var(--green-strong);
+  border: 2px solid var(--green-strong);
+
+  transition: color .2s, background .2s;
+}
+
+.addButton:hover {
+  background: var(--green-strong);
+  color: var(--white);
+}

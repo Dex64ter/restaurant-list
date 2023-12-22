@@ -1,15 +1,24 @@
-import styles from './Search.module.css'
+import styles from './Search.module.css';
+import { FiSearch } from 'react-icons/fi';
 
-export function Search() {
+interface SearchProps {
+  onNewReviewModalIsOpen: () => void;
+}
+
+export function Search({onNewReviewModalIsOpen}:SearchProps) {
   return (
     <div className={styles.search}>
-      <label htmlFor="Pesquisar">
-        Pesquisar
-        <input type="text" className="" id="Pesquisar"/>
-      </label>
-      <a className={styles.addButton} href="#">
+      <fieldset>
+        <label htmlFor="Pesquisar">
+          Pesquisar <FiSearch/>
+        </label>
+        <input type="text" className="" id="Pesquisar" />
+      </fieldset>
+      
+      <a className={styles.addButton} href="#" onClick={onNewReviewModalIsOpen}>
         Adicionar
       </a>
+      
     </div>
   );
 }
