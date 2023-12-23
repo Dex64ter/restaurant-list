@@ -43,7 +43,7 @@ body, textarea, input, button {
 
 .Modal {
   width: 100%;
-  max-width: 640px;
+  max-width: 600px;
   background: var(--gray-500);
   padding: 2rem 1.875rem;
   position: relative;

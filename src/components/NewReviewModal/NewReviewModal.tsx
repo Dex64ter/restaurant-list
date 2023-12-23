@@ -1,18 +1,34 @@
-import Modal from 'react-modal';
-import styles from './NewReviewModal.module.css'
-import Rating from '@material-ui/lab/Rating';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import { useState } from 'react';
-
+import Modal from "react-modal";
+import styles from "./NewReviewModal.module.css";
+import Rating from "@material-ui/lab/Rating";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import { FormEvent, useState } from "react";
 
 interface NewReviewModalProps {
   isOpen: boolean;
   onRequest: () => void;
 }
 
-export function NewReviewModal({isOpen, onRequest}: NewReviewModalProps) {
-  const [value, setValue] = useState(0);
+export function NewReviewModal({ isOpen, onRequest }: NewReviewModalProps) {
+  const [nameRestaurant, setNameRestaurant] = useState('');
+  const [comments, setComments] = useState('');
+  const [valueRating, setValueRating] = useState(0);
+  const [result, setResult] = useState({});
+
+  function handleCreateNewReview(event: FormEvent){
+    event.preventDefault();
+    const data = {
+      'name': nameRestaurant,
+      'comments': comments,
+      'rating': valueRating
+    }
+    setResult(data);
+  }
+
+  function handleClickButton() {
+    console.log(result)
+  }
 
   return (
     <Modal
@@ -22,33 +38,53 @@ export function NewReviewModal({isOpen, onRequest}: NewReviewModalProps) {
       contentLabel="Example Modal"
       onRequestClose={onRequest}
     >
-      <form className={styles.formModal} action="">
+      <form className={styles.formModal} onSubmit={handleCreateNewReview}>
         <h2>Novo Review</h2>
         <fieldset>
           <label htmlFor="name">Nome</label>
-          <input id='name' type="text" placeholder='Nome do lugar'/>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Nome do estabelecimento"
+            value={nameRestaurant}
+            onChange={event => setNameRestaurant(event.target.value)}
+          />
         </fieldset>
         <fieldset>
           <label htmlFor="comments">Comentários</label>
-          <textarea className={styles.textAreaComp} id='comments' placeholder='Comentários'/>
+          <textarea
+            className={styles.textAreaComp}
+            id="comments"
+            name="comments"
+            placeholder="Comentários"
+            value={comments}
+            onChange={event => setComments(event.target.value)}
+
+          />
         </fieldset>
 
         <Box component="fieldset" mb={3} borderColor="transparent">
           <Typography component="label">Nota</Typography>
           <Rating
-            name="simple-controlled"
-            value={value}
+            name="rating"
+            value={valueRating}
             onChange={(_e, newValue) => {
-              setValue(newValue || 0);
+              setValueRating(newValue || 0);
             }}
           />
         </Box>
 
         <div className={styles.buttonArea}>
-          <button onClick={onRequest} className={styles.cancelButton}>Cancelar</button>
-          <button className={styles.addButton} type="submit">Adicionar</button>
+          <button onClick={onRequest} className={styles.cancelButton}>
+            Cancelar
+          </button>
+
+          <button type="submit" className={styles.addButton} onClick={handleClickButton}>
+            Adicionar
+          </button>
         </div>
       </form>
     </Modal>
-  )
+  );
 }

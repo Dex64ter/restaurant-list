@@ -10,11 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/lab": "^4.0.0-alpha.61",
+    "mysql2": "^3.6.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-modal": "^3.16.1"
+    "react-icons": "^4.12.0",
+    "react-modal": "^3.16.1",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@types/react-modal": "^3.16.3",

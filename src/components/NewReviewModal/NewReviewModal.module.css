@@ -18,14 +18,19 @@
 }
 
 .formModal fieldset label {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .formModal fieldset input, .textAreaComp {
   outline: none;
-  font-size: 1.5rem;
   padding: .5rem .8rem;
-  white-space: pre-wrap;
+  border-radius: 15px;
+  resize: none;
+}
+
+.textAreaComp {
+  height: 6rem;
+
 }
 
 .buttonArea {
@@ -37,7 +42,7 @@
 .buttonArea button {
   width: 248px;
   padding: 1.375rem 3.5rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
 
   background: transparent;
