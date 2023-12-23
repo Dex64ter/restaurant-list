@@ -26,11 +26,11 @@ export function NewReviewModal({isOpen, onRequest}: NewReviewModalProps) {
         <h2>Novo Review</h2>
         <fieldset>
           <label htmlFor="name">Nome</label>
-          <input id='name' type="text" />
+          <input id='name' type="text" placeholder='Nome do lugar'/>
         </fieldset>
         <fieldset>
           <label htmlFor="comments">Comentários</label>
-          <textarea className={styles.textAreaComp} id='comments' />
+          <textarea className={styles.textAreaComp} id='comments' placeholder='Comentários'/>
         </fieldset>
 
         <Box component="fieldset" mb={3} borderColor="transparent">

@@ -8,6 +8,12 @@
  display: grid;
  grid-template-columns: 70px 1fr;
  gap: 1.75rem;
+ transition: background .2s;
+}
+
+.element:hover {
+  background: var(--gray-400);
+  cursor: pointer;
 }
 
 .resImage {
@@ -41,4 +47,8 @@
   gap: 1rem;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.content fieldset {
+  border: none;
 }

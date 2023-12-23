@@ -21,7 +21,7 @@ export function ResElement({name, comments, current_date, rating}: ResElement) {
           <span>
             {comments}
           </span>
-          <Box component="fieldset" mb={3} borderColor="transparent">
+          <Box component="fieldset" mb={3}>
             <Rating name="read-only" value={rating} readOnly />
           </Box>
         </div>
