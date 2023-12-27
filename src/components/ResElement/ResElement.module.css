@@ -37,8 +37,14 @@
 
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
+}
+
+.nomeData time {
+  font-size: .875rem;
+  font-weight: bold;
+  color: var(--white);
 }
 
 .content {
@@ -47,6 +53,13 @@
   gap: 1rem;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.content span {
+  font-size: 1rem;
+  line-height: 1rem;
+  color: var(--white);
+
 }
 
 .content fieldset {

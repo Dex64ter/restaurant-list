@@ -1,16 +1,31 @@
 import Modal from 'react-modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Search } from './components/Search/Search';
 import { ResElement } from './components/ResElement/ResElement';
 import { NewReviewModal } from './components/NewReviewModal/NewReviewModal';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from './services/firebase';
 
 import './global.css';
 import styles from './App.module.css';
 
 Modal.setAppElement('#root');
 
+type Review = {
+  dateFormat: Date;
+  id: string;
+  name: string;
+  comments: string;
+  rating: number;
+  date: {
+    seconds: number;
+    nanoseconds: number;
+  };
+}
+
 export function App() {
   const [newReviewModalIsOpen, setNewReviewModalIsOpen] = useState(false);
+  const [reviewList, setReviewList] = useState<Review[]>([]);
 
   function handleModal(){
     setNewReviewModalIsOpen(!newReviewModalIsOpen);
@@ -20,6 +35,28 @@ export function App() {
     setNewReviewModalIsOpen(false);
   }
 
+  const fectchPost = async () => {
+    await getDocs(collection(db, 'Reviews'))
+    .then((querySnapshot) => {
+      const newData = querySnapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id,
+      }))
+
+      const elements = newData as Review[];
+      const newReviews = elements.map((element) => ({
+        ...element,
+        dateFormat: new Date(element.date.seconds * 1000),
+      }))
+      setReviewList(newReviews)
+    });
+
+  }
+
+  useEffect(() => {
+    fectchPost();
+  },[])
+
   return ( 
     <>
       <main className={styles.container}>
@@ -28,8 +65,19 @@ export function App() {
           <Search onNewReviewModalIsOpen={handleModal} />
           <NewReviewModal isOpen={newReviewModalIsOpen} onRequest={closeModal} />
           <ul>
-            <ResElement name={'Coco Bambu'} comments={'Lorem ipsum dolor sit amet. Provident, voluptatum'} current_date={'24/02/2023'} rating={4} />
-            <ResElement name={'Sushi Club'} comments={'Lorem ipsum dolor sit amet. Provident, voluptatum'} current_date={'05/05/2023'} rating={3} />
+            {
+              reviewList.map(rev => {
+                return (
+                  <ResElement
+                    key={rev.id}
+                    name={rev.name}
+                    comments={rev.comments}
+                    rating={rev.rating}
+                    send_date={rev.dateFormat}
+                  />
+                )
+              })
+            }
           </ul>
         </section>
       </main>
