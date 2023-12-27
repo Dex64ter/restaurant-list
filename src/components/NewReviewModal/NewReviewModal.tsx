@@ -17,31 +17,30 @@ export function NewReviewModal({ isOpen, onRequest }: NewReviewModalProps) {
   const [nameRestaurant, setNameRestaurant] = useState('');
   const [comments, setComments] = useState('');
   const [valueRating, setValueRating] = useState(0);
-  const [newReview, setNewReview] = useState({});
   const currentTime = Timestamp.fromDate(new Date());
 
   function handleCreateNewReview(event: FormEvent){
     event.preventDefault();
-    storeData();
-  }
-
-  const storeData = async () => await addDoc(collection(db, "Reviews"), newReview)
-  .then((docRef) => {
-    console.log('Documento adicionado com ID:', docRef.id);
-  })
-  .catch((error) => {
-    console.error('Erro ao adicionar documento:', error);
-  });
-
-  function handleClickButton(){
     const data = {
       name: nameRestaurant,
       comments: comments,
       rating: valueRating,
       date: currentTime,
     }
-    setNewReview(data);
+
+    const storeDoc = async () => await addDoc(collection(db, 'reviews'), data).then((docRef) => {
+      console.log('Documento adicionado com ID:', docRef.id);
+    }).catch((error) => {
+      console.error('Erro ao adicionar documento:', error);
+    });
+
+    storeDoc();
+
+    setNameRestaurant('')
+    setComments('')
+    setValueRating(0)
   }
+
 
   return (
     <Modal
@@ -82,6 +81,7 @@ export function NewReviewModal({ isOpen, onRequest }: NewReviewModalProps) {
           <Rating
             name="rating"
             value={valueRating}
+            precision={0.5}
             onChange={(_e, newValue) => {
               setValueRating(newValue || 0);
             }}
@@ -93,7 +93,7 @@ export function NewReviewModal({ isOpen, onRequest }: NewReviewModalProps) {
             Cancelar
           </button>
 
-          <button type="submit" onClick={handleClickButton} className={styles.addButton}>
+          <button type="submit" className={styles.addButton}>
             Adicionar
           </button>
         </div>

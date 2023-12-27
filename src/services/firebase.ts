@@ -1,16 +1,14 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp,  } from "firebase/app";
+
+import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDZ2Snn4lOznNTjU1UR9OhHlP772xCXP2Q",
-  authDomain: "restaurant-list-d730e.firebaseapp.com",
-  projectId: "restaurant-list-d730e",
-  storageBucket: "restaurant-list-d730e.appspot.com",
-  messagingSenderId: "353275489251",
-  appId: "1:353275489251:web:0f4a16569e1e2a5e910ed6",
-  measurementId: "G-4CDNY93X72"
+  apiKey: "AIzaSyAh6C5Ee7nC8aO7-UWEq23foceN8_Hi8bw",
+  authDomain: "restaurant-reviews-c66ce.firebaseapp.com",
+  projectId: "restaurant-reviews-c66ce",
+  storageBucket: "restaurant-reviews-c66ce.appspot.com",
+  messagingSenderId: "1016023485080",
+  appId: "1:1016023485080:web:c388a6ff3b57ec17159eed"
 };
 
 // Initialize Firebase

@@ -36,7 +36,7 @@ export function App() {
   }
 
   const fectchPost = async () => {
-    await getDocs(collection(db, 'Reviews'))
+    await getDocs(collection(db, 'reviews'))
     .then((querySnapshot) => {
       const newData = querySnapshot.docs.map(doc => ({
         ...doc.data(),
@@ -48,7 +48,8 @@ export function App() {
         ...element,
         dateFormat: new Date(element.date.seconds * 1000),
       }))
-      setReviewList(newReviews)
+      setReviewList(newReviews);
+      
     });
 
   }
