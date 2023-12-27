@@ -1,9 +1,12 @@
 import Modal from "react-modal";
-import styles from "./NewReviewModal.module.css";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { FormEvent, useState } from "react";
+import { db } from "../../services/firebase";
+import { Timestamp, collection, addDoc } from "firebase/firestore";
+
+import styles from "./NewReviewModal.module.css";
 
 interface NewReviewModalProps {
   isOpen: boolean;
@@ -14,20 +17,30 @@ export function NewReviewModal({ isOpen, onRequest }: NewReviewModalProps) {
   const [nameRestaurant, setNameRestaurant] = useState('');
   const [comments, setComments] = useState('');
   const [valueRating, setValueRating] = useState(0);
-  const [result, setResult] = useState({});
+  const [newReview, setNewReview] = useState({});
+  const currentTime = Timestamp.fromDate(new Date());
 
   function handleCreateNewReview(event: FormEvent){
     event.preventDefault();
-    const data = {
-      'name': nameRestaurant,
-      'comments': comments,
-      'rating': valueRating
-    }
-    setResult(data);
+    storeData();
   }
 
-  function handleClickButton() {
-    console.log(result)
+  const storeData = async () => await addDoc(collection(db, "Reviews"), newReview)
+  .then((docRef) => {
+    console.log('Documento adicionado com ID:', docRef.id);
+  })
+  .catch((error) => {
+    console.error('Erro ao adicionar documento:', error);
+  });
+
+  function handleClickButton(){
+    const data = {
+      name: nameRestaurant,
+      comments: comments,
+      rating: valueRating,
+      date: currentTime,
+    }
+    setNewReview(data);
   }
 
   return (
@@ -80,7 +93,7 @@ export function NewReviewModal({ isOpen, onRequest }: NewReviewModalProps) {
             Cancelar
           </button>
 
-          <button type="submit" className={styles.addButton} onClick={handleClickButton}>
+          <button type="submit" onClick={handleClickButton} className={styles.addButton}>
             Adicionar
           </button>
         </div>

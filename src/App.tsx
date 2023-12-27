@@ -55,7 +55,7 @@ export function App() {
 
   useEffect(() => {
     fectchPost();
-  },[])
+  },[reviewList])
 
   return ( 
     <>
