@@ -1,9 +1,10 @@
 import Modal from 'react-modal';
 import { useEffect, useState } from 'react';
-import { Search } from './components/Search/Search';
 import { ResElement } from './components/ResElement/ResElement';
 import { NewReviewModal } from './components/NewReviewModal/NewReviewModal';
-import { collection, getDocs } from 'firebase/firestore';
+import { FiSearch } from 'react-icons/fi';
+
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from './services/firebase';
 
 import './global.css';
@@ -25,7 +26,23 @@ type Review = {
 
 export function App() {
   const [newReviewModalIsOpen, setNewReviewModalIsOpen] = useState(false);
+  const [resultSearch, setResultSearch] = useState("");
   const [reviewList, setReviewList] = useState<Review[]>([]);
+
+  const newArraySearched = query(collection(db, "reviews"), where("name", "==", resultSearch));
+  const querySnapShot = async () =>  await getDocs(newArraySearched).then(element => {
+    const newData = element.docs.map(doc => ({
+      ...doc.data(),
+      id: doc.id,
+    }))
+
+    const elements = newData as Review[];
+    const newReviews = elements.map((element) => ({
+      ...element,
+      dateFormat: new Date(element.date.seconds * 1000),
+    }))
+    setReviewList(newReviews);
+  });
 
   function handleModal(){
     setNewReviewModalIsOpen(!newReviewModalIsOpen);
@@ -35,7 +52,7 @@ export function App() {
     setNewReviewModalIsOpen(false);
   }
 
-  const fectchPost = async () => {
+  const fetchPost = async () => {
     await getDocs(collection(db, 'reviews'))
     .then((querySnapshot) => {
       const newData = querySnapshot.docs.map(doc => ({
@@ -55,15 +72,31 @@ export function App() {
   }
 
   useEffect(() => {
-    fectchPost();
-  },[reviewList])
+    resultSearch ? querySnapShot() : fetchPost();
+  },[reviewList, resultSearch])
 
   return ( 
     <>
       <main className={styles.container}>
         <h1>Restaurantes</h1>
         <section className={styles.list}>
-          <Search onNewReviewModalIsOpen={handleModal} />
+        <div className={styles.search}>
+          <fieldset>
+            <label htmlFor="Pesquisar">
+              Pesquisar <FiSearch/>
+            </label>
+            <input
+              type="text"
+              id="Pesquisar"
+              onChange={event => setResultSearch(event.target.value)}
+            />
+          </fieldset>
+          
+          <a className={styles.addButton} href="#" onClick={handleModal}>
+            Adicionar
+          </a>
+          
+        </div>
           <NewReviewModal isOpen={newReviewModalIsOpen} onRequest={closeModal} />
           <ul>
             {
