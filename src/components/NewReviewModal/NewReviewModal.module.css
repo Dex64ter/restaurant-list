@@ -75,3 +75,26 @@
   background: var(--green-strong);
   color: var(--white);
 }
+
+@media (max-width: 768px) {
+  .formModal {
+    gap: 1rem;
+  }
+
+  .formModal h2 {
+    font-size: 2rem;
+  }
+
+  .formModal fieldset label {
+    font-size: 1rem;
+  }
+
+  .formModal fieldset input, .textAreaComp {
+    font-size: 1rem;
+  }
+
+  .buttonArea button {
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+  }
+}
