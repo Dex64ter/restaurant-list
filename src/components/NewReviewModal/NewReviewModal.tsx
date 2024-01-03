@@ -19,6 +19,7 @@ export function NewReviewModal({ isOpen, onRequest }: NewReviewModalProps) {
   const [valueRating, setValueRating] = useState(0);
   const currentTime = Timestamp.fromDate(new Date());
 
+
   function handleCreateNewReview(event: FormEvent){
     event.preventDefault();
     const data = {
@@ -27,7 +28,7 @@ export function NewReviewModal({ isOpen, onRequest }: NewReviewModalProps) {
       rating: valueRating,
       date: currentTime,
     }
-
+    
     const storeDoc = async () => await addDoc(collection(db, 'reviews'), data).then((docRef) => {
       console.log('Documento adicionado com ID:', docRef.id);
     }).catch((error) => {
@@ -35,8 +36,6 @@ export function NewReviewModal({ isOpen, onRequest }: NewReviewModalProps) {
     });
 
     storeDoc();
-
-    setNameRestaurant('')
     setComments('')
     setValueRating(0)
   }
@@ -57,7 +56,6 @@ export function NewReviewModal({ isOpen, onRequest }: NewReviewModalProps) {
           <input
             id="name"
             name="name"
-            type="text"
             placeholder="Nome do estabelecimento"
             value={nameRestaurant}
             onChange={event => setNameRestaurant(event.target.value)}

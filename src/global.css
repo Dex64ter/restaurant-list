@@ -1,9 +1,9 @@
 :root {
-  --white: #FFFFFF;
-  --gray-bk: #1E1E1E;
-  --gray-500: #3A3D3D;
-  --gray-400: #4F5252;
-  --gray-300: #7F8383;
+  --white: #000F08;
+  --gray-bk: #4C212A;
+  --gray-500: #E9EB87;
+  --gray-400: #AF2BBF;
+  --gray-300: #5C80BC;
   --red-alert: #BE2828;
 
   --green-strong: #2D9A24;
@@ -48,4 +48,11 @@ body, textarea, input, button {
   padding: 2rem 1.875rem;
   position: relative;
   border-radius: 15px;
+}
+
+@media (max-width: 768px) {
+  .Modal {
+    padding: 2rem 1rem;
+    max-width: 360px;
+  }
 }

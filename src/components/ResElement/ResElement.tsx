@@ -1,6 +1,6 @@
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
-import { format } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 import styles from "./ResElement.module.css"
@@ -14,21 +14,14 @@ interface ResElement {
 
 
 export function ResElement({name, comments, rating, send_date}: ResElement) {
-  const isToday = () => {
-    const dataToday = new Date();
-    if (
-      send_date.getFullYear() === dataToday.getFullYear() &&
-      send_date.getMonth() === dataToday.getMonth() &&
-      send_date.getDate() === dataToday.getDate()
-    ){
-      return true;
-    }else{
-      return false;
-    }
-  }
 
   const date = format(send_date, "dd 'de' MMM yyyy", {
     locale: ptBR
+  })
+
+  const timePass = formatDistanceToNow(send_date, {
+    locale: ptBR,
+    addSuffix: true
   })
   
   return (
@@ -37,7 +30,7 @@ export function ResElement({name, comments, rating, send_date}: ResElement) {
       <section>
         <div className={styles.nomeData}>
           <strong>{name}</strong>
-          <time >{isToday() ? "Hoje" : date.toString()}</time>
+          <time dateTime={date}> {timePass} </time>
         </div>
         <div className={styles.content}>
           <span>

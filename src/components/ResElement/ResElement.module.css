@@ -9,6 +9,8 @@
  grid-template-columns: 70px 1fr;
  gap: 1.75rem;
  transition: background .2s;
+
+ box-shadow: 3px 3px 16px #00000055;
 }
 
 .element:hover {

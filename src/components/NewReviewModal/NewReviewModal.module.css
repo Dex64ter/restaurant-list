@@ -24,13 +24,14 @@
 .formModal fieldset input, .textAreaComp {
   outline: none;
   padding: .5rem .8rem;
-  border-radius: 15px;
   resize: none;
+  box-shadow: 15px 15px 29px #00000025;
+  border-radius: 15px;
+  border: none;
 }
 
 .textAreaComp {
   height: 6rem;
-
 }
 
 .buttonArea {

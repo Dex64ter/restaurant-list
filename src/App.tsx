@@ -68,35 +68,34 @@ export function App() {
       setReviewList(newReviews);
       
     });
-
   }
 
   useEffect(() => {
     resultSearch ? querySnapShot() : fetchPost();
-  },[reviewList, resultSearch])
+  },[resultSearch])
 
   return ( 
     <>
       <main className={styles.container}>
         <h1>Restaurantes</h1>
         <section className={styles.list}>
-        <div className={styles.search}>
-          <fieldset>
-            <label htmlFor="Pesquisar">
-              Pesquisar <FiSearch/>
-            </label>
-            <input
-              type="text"
-              id="Pesquisar"
-              onChange={event => setResultSearch(event.target.value)}
-            />
-          </fieldset>
-          
-          <a className={styles.addButton} href="#" onClick={handleModal}>
-            Adicionar
-          </a>
-          
-        </div>
+          <div className={styles.search}>
+            <fieldset>
+              <label htmlFor="Pesquisar">
+                Pesquisar <FiSearch/>
+              </label>
+              <input
+                type="text"
+                id="Pesquisar"
+                onChange={event => setResultSearch(event.target.value)}
+              />
+            </fieldset>
+            
+            <a className={styles.addButton} href="#" onClick={handleModal}>
+              Adicionar
+            </a>
+            
+          </div>
           <NewReviewModal isOpen={newReviewModalIsOpen} onRequest={closeModal} />
           <ul>
             {
